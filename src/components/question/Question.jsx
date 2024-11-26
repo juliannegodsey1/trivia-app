@@ -1,4 +1,9 @@
-const Question = ({ questionData }) => {
+const Question = ({ questionData, onAnswer }) => {
+  const handleSelection = (selectedAnswer) => {
+    const isCorrect = selectedAnswer === questionData.correctAnswer;
+    onAnswer(isCorrect);
+  };
+
   return (
     <div className="question-card">
       <h2 className="question-title">{questionData.question}</h2>
@@ -10,6 +15,7 @@ const Question = ({ questionData }) => {
               id={`answer-${index}`}
               name="answer"
               value={answer}
+              onChange={() => handleSelection(answer)}
             />
             <label htmlFor={`answer-${index}`}>{answer}</label>
           </li>
